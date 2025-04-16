@@ -37,7 +37,7 @@ const Header = () => (
           <p className="p-text">Freelancer</p>
         </div>
         <div className="tag-cmpp app__flex">
-         <a href="https://drive.google.com/file/d/1PNs1E852rCA2EOuo7QHpYhXcgzvfwn_U/view?usp=sharing" target="_blank" rel="noreferrer">
+         <a href="https://drive.google.com/file/d/1tSVXfm42eW0oUoQxtdmgYmyrjPR4guiN/view?usp=sharing" target="_blank" rel="noreferrer">
          <p className="p-text">Download CV</p>
          </a>
         
