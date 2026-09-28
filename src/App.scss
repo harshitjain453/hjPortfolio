@@ -442,7 +442,7 @@ a:focus-visible, button:focus-visible {
   .round-link { width: 60px; height: 60px; }
   .section-heading { display: block; }
   .section-heading__aside { margin-top: 2rem; }
-  .work__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .work__grid { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
   .project:nth-child(even) { margin-top: 0; }
   .project__visual { height: min(85vw, 500px); }
   .about__details { margin-left: 0; grid-template-columns: 1fr; gap: 4rem; }
@@ -460,7 +460,9 @@ a:focus-visible, button:focus-visible {
   .hero__foot { font-size: 0.55rem; }
   .work__filters button { padding: 0.7rem 0.9rem; }
   .project__visual { height: 82vw; }
+  .project__placeholder { max-width: 100%; font-size: clamp(2rem, 7vw, 3rem); overflow-wrap: anywhere; }
   .project__view { width: 80px; height: 80px; font-size: 0.5rem; transform: translateY(0); }
+  .project__details { flex-wrap: wrap; }
   .contact__footer { display: grid; grid-template-columns: 1fr auto; }
   .contact__footer div { grid-column: 1 / -1; flex-wrap: wrap; }
 }
