@@ -1,20 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --font-base: "DM Sans", sans-serif;
-
-  --primary-color: #edf2f8;
-  --secondary-color: #313bac;
-  --black-color: #030303;
-  --lightGray-color: #e4e4e4;
-  --gray-color: #6b7688;
-  --brown-color: #46364a;
-  --white-color: #ffffff;
+  --font-body: "DM Sans", sans-serif;
+  --font-display: "Syne", sans-serif;
+  --ink: #111a15;
+  --paper: #f4f5eb;
+  --lime: #c9f073;
+  --muted: #aeb9ad;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  scroll-behavior: smooth;
 }
+
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+button { font-family: inherit; }
+::selection { background: var(--lime); color: var(--ink); }
+section, footer, #skills { scroll-margin-top: 80px; }
