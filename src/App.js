@@ -14,6 +14,7 @@ const featuredWork = [
   { _id: 'summerizer', title: 'AI Summerizer', tags: ['React JS'], projectLink: 'https://ai-summerizer-tau.vercel.app/', codeLink: 'https://github.com/harshitjain453/AISummery' },
 ];
 const defaultSkills = ['JavaScript', 'React JS', 'Next Js', 'Node JS', 'MongoDB', 'Figma', 'Git'];
+const defaultExperiences = [{ year: '2021', works: [{ name: 'Frontend Developer', company: 'Tata Consultancy Services' }] }];
 const filters = ['All', 'React JS', 'Next JS'];
 
 function Reveal({ children, className = '', delay = 0 }) {
@@ -133,7 +134,7 @@ function Work({ works }) {
   );
 }
 
-function About({ skills, experience }) {
+function About({ skills, experiences }) {
   return (
     <section id="about" className="about section-pad">
       <div className="about__inner page-width">
@@ -146,7 +147,12 @@ function About({ skills, experience }) {
           </Reveal>
           <Reveal className="about__experience" delay={0.1}>
             <span className="eyebrow">A LITTLE BACKGROUND</span>
-            <div><span>{experience?.year || '2021'}</span><p>{experience?.works?.[0]?.name || 'Frontend Developer'}<small>{experience?.works?.[0]?.company || 'Tata Consultancy Services'}</small></p></div>
+            {experiences.flatMap((experience) => (experience.works || []).map((work, index) => (
+              <div className="about__experience-entry" key={`${experience._id || experience.year}-${index}`}>
+                <span>{experience.year}</span>
+                <p>{work.name}<small>{work.company}</small></p>
+              </div>
+            )))}
           </Reveal>
         </div>
       </div>
@@ -177,22 +183,22 @@ function Contact() {
 function App() {
   const [works, setWorks] = useState(featuredWork);
   const [skills, setSkills] = useState(defaultSkills);
-  const [experience, setExperience] = useState(null);
+  const [experiences, setExperiences] = useState(defaultExperiences);
 
   useEffect(() => {
-    if (!process.env.REACT_APP_SANITY_PROJECT_ID) return;
+    if (!client) return;
     client.fetch('*[_type == "works"]{_id,title,tags,projectLink,codeLink,imgUrl}').then((data) => {
       if (data.length) setWorks(data);
     }).catch(() => {});
     client.fetch('*[_type == "skills"]{name}').then((data) => {
       if (data.length) setSkills(data.map((skill) => skill.name).filter(Boolean));
     }).catch(() => {});
-    client.fetch('*[_type == "experiences"]{year,works[]{name,company}}').then((data) => {
-      if (data.length) setExperience(data[0]);
+    client.fetch('*[_type == "experiences"] | order(year desc){_id,year,works[]{name,company}}').then((data) => {
+      if (data.length) setExperiences(data);
     }).catch(() => {});
   }, []);
 
-  return <div className="app"><Navbar /><main><Hero /><Marquee /><Work works={works} /><About skills={skills} experience={experience} /></main><Contact /></div>;
+  return <div className="app"><Navbar /><main><Hero /><Marquee /><Work works={works} /><About skills={skills} experiences={experiences} /></main><Contact /></div>;
 }
 
 export default App;

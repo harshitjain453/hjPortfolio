@@ -389,8 +389,8 @@ a:focus-visible, button:focus-visible {
 .text-link span { font-size: 1.2rem; transition: transform 0.25s; }
 .text-link:hover span { transform: translate(3px, -3px); }
 .about__experience { align-self: end; padding-bottom: 0.7rem; }
-.about__experience > div { display: flex; gap: 2rem; padding-top: 1.3rem; margin-top: 1rem; border-top: 1px solid rgba(23, 31, 25, 0.3); font-size: 0.9rem; }
-.about__experience > div > span { color: #638b4c; }
+.about__experience-entry { display: flex; gap: 2rem; padding-top: 1.3rem; margin-top: 1rem; border-top: 1px solid rgba(23, 31, 25, 0.3); font-size: 0.9rem; }
+.about__experience-entry > span { color: #638b4c; }
 .about__experience small { display: block; margin-top: 0.4rem; color: #666d63; font-size: 0.75rem; }
 .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; padding-top: clamp(8rem, 13vw, 14rem); }
 .skills__heading h3 { max-width: 550px; margin-top: 2rem; font-size: clamp(3.5rem, 6vw, 7rem); line-height: 1; }
@@ -453,7 +453,7 @@ a:focus-visible, button:focus-visible {
 
 @media (max-width: 480px) {
   .hero__grid { min-height: max(660px, 85svh); }
-  .hero__title { font-size: clamp(2.9rem, 10.2vw, 4rem); }
+  .hero__title { font-size: clamp(2rem, 9vw, 3.8rem); white-space: normal; }
   .hero__visual { top: 33%; right: -22%; width: 92vw; }
   .hero__bottom { justify-content: space-between; gap: 1rem; }
   .hero__bottom p { max-width: 210px; font-size: 0.85rem; }
