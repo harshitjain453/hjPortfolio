@@ -1,48 +1,33 @@
-import React, { useState } from 'react';
-import { HiMenuAlt4, HiX } from 'react-icons/hi';
-import { motion } from 'framer-motion';
-
-import { images } from '../../constants';
+import React, { useEffect, useState } from 'react';
 import './Navbar.scss';
 
+const links = [
+  { label: 'WORK', href: '#work' },
+  { label: 'ABOUT', href: '#about' },
+  { label: 'TOOLKIT', href: '#skills' },
+];
+
 const Navbar = () => {
-  const [toggle, setToggle] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, []);
 
   return (
     <nav className="app__navbar">
-      <div className="app__navbar-logo">
-        {/* <img src={images.frame114} alt="logo" style={{backgroundColor:"black"}} /> */}
-        <p >Harshit</p>
-      </div>
-      <ul className="app__navbar-links">
-        {['home', 'about', 'work', 'skills', 'contact'].map((item) => (
-          <li className="app__flex p-text" key={`link-${item}`}>
-            <div />
-            <a href={`#${item}`}>{item}</a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="app__navbar-menu">
-        <HiMenuAlt4 onClick={() => setToggle(true)} />
-
-        {toggle && (
-          <motion.div
-            whileInView={{ x: [300, 0] }}
-            transition={{ duration: 0.85, ease: 'easeOut' }}
-          >
-            <HiX onClick={() => setToggle(false)} />
-            <ul>
-              {['home', 'about', 'work', 'skills', 'contact'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item}`} onClick={() => setToggle(false)}>
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
+      <div className="app__navbar-inner page-width">
+        <a className="app__navbar-logo" href="#home" onClick={() => setOpen(false)} aria-label="Harshit Jain, back to top">HJ<span>.</span></a>
+        <span className="app__navbar-caption">HARSHIT JAIN<br />FULL-STACK ENGINEER</span>
+        <button className="app__navbar-toggle" type="button" aria-controls="primary-navigation" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? 'CLOSE −' : 'MENU +'}</button>
+        <div id="primary-navigation" className={`app__navbar-links ${open ? 'is-open' : ''}`}>
+          {links.map(({ label, href }) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
+          <a className="app__navbar-cta" href="#contact" onClick={() => setOpen(false)}>LET’S TALK <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </nav>
   );
